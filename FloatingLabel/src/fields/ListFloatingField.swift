@@ -95,7 +95,7 @@ extension ListFloatingField {
 		dropDown.anchorView = self
 		dropDown.topOffset = CGPoint(x: Constraints.horizontalPadding, y: -bounds.height)
 
-		dropDown.selectionAction = { [unowned self] (index, item) in
+		dropDown.selectionAction = { [unowned self] (index, item, _) in
 			self.editing = false
 
 			self.selectedItem = item
