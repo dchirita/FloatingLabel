@@ -26,10 +26,10 @@ open class FloatingField: UIView, TextFieldType, Helpable, Validatable {
 	//MARK: - Properties
 	
 	//MARK: UI
+    open var helperLabel = UILabel()
 	internal var floatingLabel = UILabel()
 	internal var input: InputType!
 	internal var separatorLine = UIView()
-	internal var helperLabel = UILabel()
 	
 	override open var inputView: UIView? {
 		get { return input.__inputView }
