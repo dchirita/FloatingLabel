@@ -422,7 +422,7 @@ private extension FloatingField {
 			helperState = HelperState(level: failedValidation.level)
 		} else if !hasBeenEdited || validationCheck.isValid {
 			previousHelperState = helperState
-			helperState = baseHelperState(helpText)
+			helperState = baseHelperState(helpText, helperLabel.attributedText)
 		}
 		
 		forceValidation = false
@@ -430,16 +430,8 @@ private extension FloatingField {
 		updateHelperUI()
 		
 		switch helperState {
-		case .help:
-			if let text = helperText(helpText, helperLabel.text, previousHelperState) {
-				showHelper(text: text)
-			}
-		case .error, .warning:
-			let errorText = validationCheck.failedValidation?.message
-			
-			if let text = helperText(errorText, helperLabel.text, previousHelperState) {
-				showHelper(text: text)
-			}
+		case .error, .warning, .help:
+            showHelper(text: self.helpText)
 		case .hidden:
 			hideHelper()
 		}
@@ -452,7 +444,7 @@ private extension FloatingField {
 		
 		switch helperState {
 		case .help:
-			helperColor = helpColor
+            helperColor = nil != helperLabel.attributedText ? nil : helpColor
 			
 			if !isEditing {
 				separatorColor = idleColor
@@ -481,8 +473,11 @@ private extension FloatingField {
 		}
 	}
 	
-	func showHelper(text: String) {
-		helperLabel.text = text
+	func showHelper(text: String? = nil) {
+        
+        if let text = text {
+            helperLabel.text = text
+        }
 		
 		if helperState == previousHelperState {
 			return
@@ -610,8 +605,9 @@ public func checkValidity(text: String?, validations: [Validation], level: Valid
 
 //MARK: - Helpers
 
-func baseHelperState(_ helpText: String?) -> HelperState {
-	if let text = helpText, !text.isEmpty {
+func baseHelperState(_ helpText: String?, _ attString: NSAttributedString?) -> HelperState {
+	if (nil != helpText && !helpText!.isEmpty) ||
+       (nil != attString?.string && !attString!.string.isEmpty) {
 		return .help
 	} else {
 		return .hidden

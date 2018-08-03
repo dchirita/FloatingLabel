@@ -138,7 +138,7 @@ private extension ComposeFieldsView {
 			helperState = HelperState(level: failedValidation.level)
 		} else if isValid {
 			previousHelperState = helperState
-			helperState = baseHelperState(helpText)
+			helperState = baseHelperState(helpText, self.helperLabel.attributedText)
 		}
 		
 		updateHelperUI()
