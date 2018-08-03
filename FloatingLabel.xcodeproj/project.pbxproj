@@ -43,6 +43,7 @@
 		0AE6D8B01B7A12A400BA9D61 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE6D8AF1B7A12A400BA9D61 /* UIView+Extension.swift */; };
 		0AE6D8C01B7AA25200BA9D61 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE6D8BF1B7AA25200BA9D61 /* TableViewController.swift */; };
 		515655BDE2FBC1F705618511 /* Pods_FloatingLabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28126B69A9FC1718D3DD346C /* Pods_FloatingLabel.framework */; };
+		6550C97D211477A7009E3EBD /* AttributtedHelpEmailFloatingField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6550C97C211477A7009E3EBD /* AttributtedHelpEmailFloatingField.swift */; };
 		E82F81941CA52C4B000F3F29 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = E82F81911CA52C4B000F3F29 /* arrow.png */; };
 		E82F81951CA52C4B000F3F29 /* arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E82F81921CA52C4B000F3F29 /* arrow@2x.png */; };
 		E82F81961CA52C4B000F3F29 /* arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E82F81931CA52C4B000F3F29 /* arrow@3x.png */; };
@@ -99,6 +100,7 @@
 		0AE6D8AF1B7A12A400BA9D61 /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		0AE6D8BF1B7AA25200BA9D61 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		28126B69A9FC1718D3DD346C /* Pods_FloatingLabel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FloatingLabel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6550C97C211477A7009E3EBD /* AttributtedHelpEmailFloatingField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributtedHelpEmailFloatingField.swift; sourceTree = "<group>"; };
 		73AC830D706F9246F82C1846 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		823811A4515858A1F2E53CBD /* Pods-FloatingLabel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FloatingLabel.release.xcconfig"; path = "Pods/Target Support Files/Pods-FloatingLabel/Pods-FloatingLabel.release.xcconfig"; sourceTree = "<group>"; };
 		92E43EA672E8F638EF0C361B /* Pods-FloatingLabel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FloatingLabel.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FloatingLabel/Pods-FloatingLabel.debug.xcconfig"; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 				0ADFC8D11B74F8960072E63F /* SingleChoiceFloatingField.swift */,
 				0ADFC8C81B74F8960072E63F /* AutoCompleteFloatingField.swift */,
 				0ADFC8C91B74F8960072E63F /* ComposeFieldsView.swift */,
+				6550C97C211477A7009E3EBD /* AttributtedHelpEmailFloatingField.swift */,
 			);
 			path = fields;
 			sourceTree = "<group>";
@@ -351,7 +354,7 @@
 				TargetAttributes = {
 					0AE045DE1B4FAFFE001F8100 = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = ZCW4LJNN3R;
+						DevelopmentTeam = GLTW85B22N;
 						LastSwiftMigration = 0800;
 					};
 					0AE045F31B4FAFFE001F8100 = {
@@ -487,6 +490,7 @@
 				0ADFC8E11B74F8960072E63F /* AppDelegate.swift in Sources */,
 				0AE6D8AD1B7A0BA500BA9D61 /* Array+Extension.swift in Sources */,
 				0ADFC8FB1B74F8960072E63F /* FloatingField+InputField.swift in Sources */,
+				6550C97D211477A7009E3EBD /* AttributtedHelpEmailFloatingField.swift in Sources */,
 				0ADFC8EE1B74F8960072E63F /* EmailFloatingField.swift in Sources */,
 				0ADFC8E81B74F8960072E63F /* FloatingField.swift in Sources */,
 				0ADFC8E71B74F8960072E63F /* FieldType.swift in Sources */,
@@ -633,7 +637,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = ZCW4LJNN3R;
+				DEVELOPMENT_TEAM = GLTW85B22N;
 				INFOPLIST_FILE = "$(SRCROOT)/FloatingLabel/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -648,7 +652,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = ZCW4LJNN3R;
+				DEVELOPMENT_TEAM = GLTW85B22N;
 				INFOPLIST_FILE = "$(SRCROOT)/FloatingLabel/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

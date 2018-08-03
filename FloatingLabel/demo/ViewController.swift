@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController {
 	
 	@IBOutlet fileprivate weak var field: AutoCompleteFloatingField!
-	@IBOutlet fileprivate weak var emailField: FloatingTextField!
+	@IBOutlet fileprivate weak var emailField: AttributtedHelpEmailFloatingField!
 	@IBOutlet fileprivate weak var phoneField: PhoneFloatingField!
 	@IBOutlet fileprivate weak var dateField: DateFloatingField!
 	@IBOutlet fileprivate weak var vehicleTypeField: ListFloatingField!
@@ -60,7 +60,16 @@ class ViewController: UIViewController {
 	}
 	
 	func setupEmailField() {
-//		emailField.placeholder = "Email Address"
+		emailField.placeholder = "Email Address"
+        
+        let text = "Daniel added support to add attributted text"
+        let attributedText = NSMutableAttributedString(string: text)
+        attributedText.setColor(UIColor.blue, forText: "support")
+        attributedText.setColor(UIColor.blue, forText: "attributted")
+        
+        emailField.helperAttributedText = attributedText
+        emailField.callToActionDelegate = self
+        //emailField.helpText = "This is a helper text"
 	}
 	
 	func setupPhoneField() {
@@ -113,3 +122,31 @@ class ViewController: UIViewController {
 	}
 	
 }
+
+extension ViewController: AttributtedHelpEmailFloatingFieldCallToActionDelegate {
+    
+    func didPressCallToAction(field: AttributtedHelpEmailFloatingField) {
+        debugPrint("Did Press Call to Action")
+    }
+}
+
+extension NSMutableAttributedString {
+    
+    public func setColor(_ color: UIColor, forText text: String) {
+        let range = mutableString.range(of: text, options: .caseInsensitive)
+        
+        if range.location != NSNotFound {
+            addAttribute(NSForegroundColorAttributeName, value: color, range: range)
+        }
+    }
+    
+    public func setFont(_ font: UIFont, forText text: String) {
+        let range = mutableString.range(of: text, options: .caseInsensitive)
+        
+        if range.location != NSNotFound {
+            addAttribute(NSFontAttributeName, value: font, range: range)
+        }
+    }
+    
+}
+
