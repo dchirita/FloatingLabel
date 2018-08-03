@@ -8,11 +8,11 @@
 
 import UIKit
 
-protocol AttributtedHelpEmailFloatingFieldCallToActionDelegate: class {
+public protocol AttributtedHelpEmailFloatingFieldCallToActionDelegate: class {
     func didPressCallToAction(field: AttributtedHelpEmailFloatingField)
 }
 
-class AttributtedHelpEmailFloatingField: EmailFloatingField {
+open class AttributtedHelpEmailFloatingField: EmailFloatingField {
     
     public weak var callToActionDelegate: AttributtedHelpEmailFloatingFieldCallToActionDelegate?
     
@@ -34,7 +34,7 @@ class AttributtedHelpEmailFloatingField: EmailFloatingField {
         self.touchGestureHandler = touchHandler
     }
     
-    override func customizeHelperLabel() {
+    open override func customizeHelperLabel() {
         helperLabel.numberOfLines = 0
         helperLabel.clipsToBounds = true
     }
