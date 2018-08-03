@@ -201,6 +201,12 @@ extension FloatingField {
 		customizeUI()
 		updateUI(animated: false)
 	}
+    
+    open func customizeHelperLabel() {
+        helperLabel.font = helperFont
+        helperLabel.numberOfLines = HelperLabel.numberOfLines
+        helperLabel.clipsToBounds = true
+    }
 	
 	fileprivate func customizeUI() {
 		floatingLabel.textColor = floatingLabelColor
@@ -212,10 +218,8 @@ extension FloatingField {
 		input.__textColor = textColor
 		input.__font = textFont
 		input.__tintColor = activeColor
-		
-		helperLabel.font = helperFont
-		helperLabel.numberOfLines = HelperLabel.numberOfLines
-		helperLabel.clipsToBounds = true
+        
+        customizeHelperLabel()
 	}
 	
 	open override func updateConstraints() {
