@@ -174,16 +174,35 @@ open class FloatingField: UIView, TextFieldType, Helpable, Validatable {
 		setup()
 	}
 	
-}
-
-//MARK: - Initialization
-
-extension FloatingField {
-	
-	open func setup() {
-		setupUI()
-	}
-	
+    open func setup() {
+        setupUI()
+    }
+    
+    func updateUI(animated: Bool) {
+        /* BEGIN HACK:
+         * Avoid text in the textfield to jump when edition did finished
+         * (Happened only the first time)
+         * Happened because layoutIfNeeded is called in an animation few lines below
+         */
+        layoutIfNeeded()
+        /* END HACK */
+        
+        let changes: Closure = {
+            self.updateGlobalUI()
+            self.updateFloatingLabel()
+            self.updateHelper()
+            
+            self.layoutIfNeeded()
+        }
+        
+        applyChanges(changes, animated)
+    }
+    
+    open func customizeHelperLabel() {
+        helperLabel.font = helperFont
+        helperLabel.numberOfLines = HelperLabel.numberOfLines
+        helperLabel.clipsToBounds = true
+    }
 }
 
 //MARK: - UI
@@ -201,12 +220,6 @@ extension FloatingField {
 		customizeUI()
 		updateUI(animated: false)
 	}
-    
-    open func customizeHelperLabel() {
-        helperLabel.font = helperFont
-        helperLabel.numberOfLines = HelperLabel.numberOfLines
-        helperLabel.clipsToBounds = true
-    }
 	
 	fileprivate func customizeUI() {
 		floatingLabel.textColor = floatingLabelColor
@@ -340,32 +353,6 @@ extension FloatingField {
 			multiplier: 1,
 			constant: Constraints.Helper.hiddenBottomPadding)
 		addConstraint(helperLabelBottomToSuperviewConstraint)
-	}
-	
-}
-
-//MARK: - Update UI
-
-internal extension FloatingField {
-	
-	func updateUI(animated: Bool) {
-		/* BEGIN HACK:
-		 * Avoid text in the textfield to jump when edition did finished 
-		 * (Happened only the first time)
-		 * Happened because layoutIfNeeded is called in an animation few lines below
-		*/
-		layoutIfNeeded()
-		/* END HACK */
-		
-		let changes: Closure = {
-			self.updateGlobalUI()
-			self.updateFloatingLabel()
-			self.updateHelper()
-			
-			self.layoutIfNeeded()
-		}
-		
-		applyChanges(changes, animated)
 	}
 	
 }
@@ -519,7 +506,7 @@ extension FloatingField {
 		let floatingLabelHeight = NSString(string: floatingLabel.text ?? "").boundingRect(
 			with: CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude),
 			options: NSStringDrawingOptions.usesLineFragmentOrigin,
-			attributes: [NSFontAttributeName: floatingLabelFont],
+			attributes: [NSAttributedStringKey.font: floatingLabelFont],
 			context: nil).height
 		let textHeight = input.intrinsicContentSize.height
 		let spaces: CGFloat = 40
@@ -531,25 +518,20 @@ extension FloatingField {
 	override open func contentHuggingPriority(for axis: UILayoutConstraintAxis) -> UILayoutPriority {
 		switch axis {
 		case .horizontal:
-			return 250
+            return UILayoutPriority(rawValue: 250)
 		case .vertical:
-			return 1000
+            return UILayoutPriority(rawValue: 1000)
 		}
 	}
 	
 	override open func contentCompressionResistancePriority(for axis: UILayoutConstraintAxis) -> UILayoutPriority {
 		switch axis {
 		case .horizontal:
-			return 750
+            return UILayoutPriority(rawValue: 750)
 		case .vertical:
-			return 1000
+            return UILayoutPriority(rawValue: 1000)
 		}
 	}
-	
-	override open func forBaselineLayout() -> UIView {
-		return input.viewForBaselineLayout()
-	}
-	
 }
 
 //MARK: - Touch events

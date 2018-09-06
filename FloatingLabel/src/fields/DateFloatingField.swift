@@ -38,17 +38,10 @@ open class DateFloatingField: FloatingTextField {
 		setupUI()
 	}
 	
-}
-
-//MARK: - Initialization
-
-extension DateFloatingField {
-	
-	override open func setup() {
-		super.setup()
-		setupUI()
-	}
-	
+    override open func setup() {
+        super.setup()
+        setupUI()
+    }
 }
 
 //MARK: - UI

@@ -42,37 +42,30 @@ open class AutoCompleteFloatingField: FloatingTextField {
 		super.init(coder: aDecoder)
 	}
 	
-}
-
-//MARK: - Initialization
-
-extension AutoCompleteFloatingField {
-	
-	open override func setup() {
-		super.setup()
-		
-		textField.autocorrectionType = .no
-		textField.spellCheckingType = .no
-		
-		dropDown.anchorView = self
-		dropDown.direction = .bottom
-		dropDown.dismissMode = .automatic
-		dropDown.selectionAction = { [unowned self] (index, item, _) in
-			self.text = item
-			self.dropDown.selectRow(at: nil)
-			self.valueChangedAction?(self.value)
-		}
-	}
-	
-	override open func layoutSublayers(of layer: CALayer) {
-		super.layoutSublayers(of: layer)
-		
-		//HACK: layoutIfNeeded is needed on iOS 10 for the 'bound' values to be correct
-		// Follows answer found at: http://stackoverflow.com/a/39790074/2571566
-		layoutIfNeeded()
-		updateDropDownWidth()
-	}
-	
+    open override func setup() {
+        super.setup()
+        
+        textField.autocorrectionType = .no
+        textField.spellCheckingType = .no
+        
+        dropDown.anchorView = self
+        dropDown.direction = .bottom
+        dropDown.dismissMode = .automatic
+        dropDown.selectionAction = { [unowned self] (index, item, _) in
+            self.text = item
+            self.dropDown.selectRow(at: nil)
+            self.valueChangedAction?(self.value)
+        }
+    }
+    
+    override open func layoutSublayers(of layer: CALayer) {
+        super.layoutSublayers(of: layer)
+        
+        //HACK: layoutIfNeeded is needed on iOS 10 for the 'bound' values to be correct
+        // Follows answer found at: http://stackoverflow.com/a/39790074/2571566
+        layoutIfNeeded()
+        updateDropDownWidth()
+    }
 }
 
 //MARK: - TextField
@@ -85,7 +78,7 @@ extension AutoCompleteFloatingField {
 		
 		if let newText = text?.lowercased(), !newText.isEmpty {
 			let resultsDataSource = dataSource
-				.filter { $0.lowercased().characters.starts(with: newText.characters) }
+                .filter { $0.lowercased().hasPrefix(newText) }
 				.sorted { $0.lowercased() < $1.lowercased() }
 			
 			let endIndex = min(maxDisplayedItems ?? Int.max, resultsDataSource.count)

@@ -78,70 +78,57 @@ open class ListFloatingField: ActionFloatingField {
 		super.init(coder: aDecoder)
 	}
 
-}
-
-//MARK: - Initialization
-
-extension ListFloatingField {
-
-	open override func setup() {
-		super.setup()
-
-		rightView = UIImageView(image: Icon.Arrow.image().template())
-		rightViewMode = .always
-
-		setNeedsUpdateConstraints()
-
-		dropDown.anchorView = self
-		dropDown.topOffset = CGPoint(x: Constraints.horizontalPadding, y: -bounds.height)
-
-		dropDown.selectionAction = { [unowned self] (index, item, _) in
-			self.editing = false
-
-			self.selectedItem = item
-			self.selectedRow = index
-			self.text = item
-
-			self.valueChangedAction?(item)
-		}
-
-		dropDown.cancelAction = { [unowned self] in
-			self.editing = false
-		}
-
-		action = { [unowned self] in
-			self.editing = true
-			self.dropDown.show()
-		}
-	}
-
-}
-
-//MARK: - Initialization
-
-extension ListFloatingField {
-
-	override open func layoutSublayers(of layer: CALayer) {
-		super.layoutSublayers(of: layer)
-		
-		//HACK: layoutIfNeeded is needed on iOS 10 for the 'bound' values to be correct
-		// Follows answer found at: http://stackoverflow.com/a/39790074/2571566
-		layoutIfNeeded()
-		
-		let separatorLineMinY = separatorLine.superview!.convert(separatorLine.frame, to: dropDown.anchorView?.plainView).minY - 1
-		dropDown.bottomOffset = CGPoint(x: Constraints.horizontalPadding, y: separatorLineMinY)
-		dropDown.width = separatorLine.bounds.width
-	}
-
-	override open func updateUI(animated: Bool) {
-		super.updateUI(animated: animated)
-
-		if isFloatingLabelDisplayed {
-			dropDown.topOffset.y = -bounds.height
-		} else {
-			let floatingLabelMinY = floatingLabel.superview!.convert(floatingLabel.frame, to: dropDown.anchorView?.plainView).minY
-			dropDown.topOffset.y = -bounds.height + floatingLabelMinY
-		}
-	}
-
+    open override func setup() {
+        super.setup()
+        
+        rightView = UIImageView(image: Icon.Arrow.image().template())
+        rightViewMode = .always
+        
+        setNeedsUpdateConstraints()
+        
+        dropDown.anchorView = self
+        dropDown.topOffset = CGPoint(x: Constraints.horizontalPadding, y: -bounds.height)
+        
+        dropDown.selectionAction = { [unowned self] (index, item, _) in
+            self.editing = false
+            
+            self.selectedItem = item
+            self.selectedRow = index
+            self.text = item
+            
+            self.valueChangedAction?(item)
+        }
+        
+        dropDown.cancelAction = { [unowned self] in
+            self.editing = false
+        }
+        
+        action = { [unowned self] in
+            self.editing = true
+            self.dropDown.show()
+        }
+    }
+    
+    override open func layoutSublayers(of layer: CALayer) {
+        super.layoutSublayers(of: layer)
+        
+        //HACK: layoutIfNeeded is needed on iOS 10 for the 'bound' values to be correct
+        // Follows answer found at: http://stackoverflow.com/a/39790074/2571566
+        layoutIfNeeded()
+        
+        let separatorLineMinY = separatorLine.superview!.convert(separatorLine.frame, to: dropDown.anchorView?.plainView).minY - 1
+        dropDown.bottomOffset = CGPoint(x: Constraints.horizontalPadding, y: separatorLineMinY)
+        dropDown.width = separatorLine.bounds.width
+    }
+    
+    override open func updateUI(animated: Bool) {
+        super.updateUI(animated: animated)
+        
+        if isFloatingLabelDisplayed {
+            dropDown.topOffset.y = -bounds.height
+        } else {
+            let floatingLabelMinY = floatingLabel.superview!.convert(floatingLabel.frame, to: dropDown.anchorView?.plainView).minY
+            dropDown.topOffset.y = -bounds.height + floatingLabelMinY
+        }
+    }
 }

@@ -228,9 +228,9 @@ extension PhoneFloatingField {
 		
 		prefixField.addConstraint(prefixWidthConstraint)
 		
-		prefixField.setContentCompressionResistancePriority(Constraints.PhoneField.Prefix.compressionResistancePriority, for: .horizontal)
-		prefixField.setContentHuggingPriority(Constraints.PhoneField.Prefix.verticalHuggingPriority, for: .vertical)
-		suffixField.setContentHuggingPriority(Constraints.PhoneField.Prefix.verticalHuggingPriority, for: .vertical)
+        prefixField.setContentCompressionResistancePriority(UILayoutPriority(rawValue: Constraints.PhoneField.Prefix.compressionResistancePriority), for: .horizontal)
+        prefixField.setContentHuggingPriority(UILayoutPriority(rawValue: Constraints.PhoneField.Prefix.verticalHuggingPriority), for: .vertical)
+        suffixField.setContentHuggingPriority(UILayoutPriority(rawValue: Constraints.PhoneField.Prefix.verticalHuggingPriority), for: .vertical)
 	}
 	
 }

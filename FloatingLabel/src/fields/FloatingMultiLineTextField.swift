@@ -52,26 +52,19 @@ open class FloatingMultiLineTextField: FloatingField {
 		super.init(coder: aDecoder)
 	}
 	
-}
-
-//MARK: - Initialization
-
-extension FloatingMultiLineTextField {
-	
-	override open func setup() {
-		super.setup()
-		
-		textView.fadeTime = 0
-		textView.textContainerInset = .zero
-		textView.textContainer.lineFragmentPadding = 0
-		
-		listenToTextView()
-		
-		#if TARGET_INTERFACE_BUILDER
-			text = "A multiline text view"
-		#endif
-	}
-	
+    override open func setup() {
+        super.setup()
+        
+        textView.fadeTime = 0
+        textView.textContainerInset = .zero
+        textView.textContainer.lineFragmentPadding = 0
+        
+        listenToTextView()
+        
+        #if TARGET_INTERFACE_BUILDER
+        text = "A multiline text view"
+        #endif
+    }
 }
 
 //MARK: - TextView

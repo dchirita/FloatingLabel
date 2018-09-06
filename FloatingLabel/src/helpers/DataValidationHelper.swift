@@ -14,14 +14,14 @@ internal struct DataValidationHelper {
 		let pattern = "^(?:[A-Za-z0-9_\\!\\#\\$\\%\\&\\'\\*\\+\\-\\/\\=\\?\\^\\`\\{\\|\\}\\~]+\\.)*[A-Za-z0-9_\\!\\#\\$\\%\\&\\'\\*\\+\\-\\/\\=\\?\\^\\`\\{\\|\\}\\~]+@(?:(?:(?:[a-zA-Z0-9](?:[a-zA-Z0-9\\-](?!\\.)){0,61}[a-zA-Z0-9]?\\.)+[a-zA-Z0-9](?:[a-zA-Z0-9\\-](?!$)){0,61}[a-zA-Z0-9]?)|(?:\\[(?:(?:[01]?\\d{1,2}|2[0-4]\\d|25[0-5])\\.){3}(?:[01]?\\d{1,2}|2[0-4]\\d|25[0-5])\\]))$"
 		let regex = try! NSRegularExpression(pattern: pattern, options: .caseInsensitive)
 		
-		return regex.matches(in: email, options: [], range: NSMakeRange(0, email.characters.count)).count > 0
+		return regex.matches(in: email, options: [], range: NSMakeRange(0, email.count)).count > 0
 	}
 	
 	static func isValid(phone: String) -> Bool {
 		let pattern = "^\\+[0-9]{7,15}$"
 		let regex = try! NSRegularExpression(pattern: pattern, options: .caseInsensitive)
 		
-		return regex.matches(in: phone, options: [], range: NSRange(location: 0, length: phone.characters.count)).count > 0
+		return regex.matches(in: phone, options: [], range: NSRange(location: 0, length: phone.count)).count > 0
 	}
 	
 }

@@ -89,7 +89,7 @@ class ViewController: UIViewController {
 		dateField.formatter.dateStyle = .long
 		dateField.formatter.timeStyle = .none
         dateField.valueChangedAction = { value in
-            print("Value: \(value)")
+            print("Value: \(String(describing: value))")
         }
 	}
 	
@@ -136,7 +136,7 @@ extension NSMutableAttributedString {
         let range = mutableString.range(of: text, options: .caseInsensitive)
         
         if range.location != NSNotFound {
-            addAttribute(NSForegroundColorAttributeName, value: color, range: range)
+            addAttribute(NSAttributedStringKey.foregroundColor, value: color, range: range)
         }
     }
     
@@ -144,7 +144,7 @@ extension NSMutableAttributedString {
         let range = mutableString.range(of: text, options: .caseInsensitive)
         
         if range.location != NSNotFound {
-            addAttribute(NSFontAttributeName, value: font, range: range)
+            addAttribute(NSAttributedStringKey.font, value: font, range: range)
         }
     }
     

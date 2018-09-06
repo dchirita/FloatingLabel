@@ -34,19 +34,12 @@ open class ActionFloatingField: FloatingTextField {
 		super.init(coder: aDecoder)
 	}
 	
-}
-
-//MARK: - Setup
-
-extension ActionFloatingField {
-	
-	override open func setup() {
-		super.setup()
-		
-		textField.disableEditionByUser()
-		textField.delegate = self
-	}
-	
+    override open func setup() {
+        super.setup()
+        
+        textField.disableEditionByUser()
+        textField.delegate = self
+    }
 }
 
 //MARK: - UITextFieldDelegate

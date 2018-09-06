@@ -34,35 +34,22 @@ open class FloatingTextField: FloatingField {
 	deinit {
 		stopListeningToTextField()
 	}
-	
-}
 
-//MARK: - Initialization
-
-extension FloatingTextField {
-	
-	override open func setup() {
-		super.setup()
-		
-		listenToTextField()
-	}
-	
-}
-
-//MARK: - Update UI
-
-extension FloatingTextField {
-	
-	override open func updateUI(animated: Bool) {
-		super.updateUI(animated: animated)
-		
-		let changes: Closure = {
-			self.rightView?.tintColor = self.separatorLine.backgroundColor
-		}
-		
-		applyChanges(changes, animated)
-	}
-	
+    override open func setup() {
+        super.setup()
+        
+        listenToTextField()
+    }
+    
+    override open func updateUI(animated: Bool) {
+        super.updateUI(animated: animated)
+        
+        let changes: Closure = {
+            self.rightView?.tintColor = self.separatorLine.backgroundColor
+        }
+        
+        applyChanges(changes, animated)
+    }
 }
 
 //MARK: - TextField
@@ -109,7 +96,7 @@ extension FloatingTextField {
 			name: NSNotification.Name.UITextFieldTextDidEndEditing,
 			object: textField)
 		
-		self.addObserver(self, forKeyPath: "textField.text", options: .new, context: &textFieldKVOContext)
+		self.addObserver(self, forKeyPath: "text", options: .new, context: &textFieldKVOContext)
 	}
 	
 	func stopListeningToTextField() {
@@ -128,7 +115,7 @@ extension FloatingTextField {
 			name: NSNotification.Name.UITextFieldTextDidEndEditing,
 			object: textField)
 		
-		self.removeObserver(self, forKeyPath: "textField.text", context: &textFieldKVOContext)
+		self.removeObserver(self, forKeyPath: "text", context: &textFieldKVOContext)
 	}
 	
 }

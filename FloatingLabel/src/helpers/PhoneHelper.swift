@@ -13,13 +13,13 @@ internal final class PhoneHelper {
 	static func componentsFromNumber(_ number: String) -> (String?, String?) {
 		let undecoratedNumber = undecorateNumberString(number)
 		let prefix = prefixes()
-			.filter { undecoratedNumber.characters.starts(with: $0.characters) }
-			.sorted { $0.characters.count > $1.characters.count }.first
+			.filter { undecoratedNumber.hasPrefix($0) }
+			.sorted { $0.count > $1.count }.first
 		
 		let suffix: String?
 		
 		if let prefix = prefix {
-			suffix = undecoratedNumber.substring(from: undecoratedNumber.characters.index(undecoratedNumber.startIndex, offsetBy: prefix.characters.count))
+            suffix = String(undecoratedNumber[undecoratedNumber.index(undecoratedNumber.startIndex, offsetBy: prefix.count)...])
 		} else {
 			suffix = undecoratedNumber
 		}
@@ -32,13 +32,13 @@ internal final class PhoneHelper {
 		var undecoratedNumber = number.replacingOccurrences(
 			of: "+",
 			with: "",
-			range: number.startIndex..<number.characters.index(number.startIndex, offsetBy: 1))
+			range: number.startIndex..<number.index(number.startIndex, offsetBy: 1))
 		
 		// Remove leading "00"
 		undecoratedNumber = undecoratedNumber.replacingOccurrences(
 			of: "00",
 			with: "",
-			range: undecoratedNumber.startIndex..<undecoratedNumber.characters.index(undecoratedNumber.startIndex, offsetBy: 2))
+			range: undecoratedNumber.startIndex..<undecoratedNumber.index(undecoratedNumber.startIndex, offsetBy: 2))
 		
 		// Remove spaces
 		undecoratedNumber = undecoratedNumber.replacingOccurrences(of: " ", with: "")

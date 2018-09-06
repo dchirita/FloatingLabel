@@ -38,27 +38,20 @@ open class PickerFloatingField: FloatingTextField {
 	required public init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 	}
-	
-}
-
-//MARK: - Initialization
-
-extension PickerFloatingField {
-	
-	override open func setup() {
-		rightView = UIImageView(image: Icon.Arrow.image().template())
-		rightViewMode = .always
-		
-		picker.dataSource = self
-		picker.delegate = self
-		inputView = picker
-		
-		textField.disableEditionByUser()
-		textField.delegate = self
-		
-		super.setup()
-	}
-	
+    
+    override open func setup() {
+        rightView = UIImageView(image: Icon.Arrow.image().template())
+        rightViewMode = .always
+        
+        picker.dataSource = self
+        picker.delegate = self
+        inputView = picker
+        
+        textField.disableEditionByUser()
+        textField.delegate = self
+        
+        super.setup()
+    }
 }
 
 //MARK: - UITextFieldDelegate

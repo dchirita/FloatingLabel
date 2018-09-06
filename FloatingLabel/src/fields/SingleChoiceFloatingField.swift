@@ -134,7 +134,7 @@ extension SingleChoiceFloatingField {
 			metrics: verticalMetrics,
 			views: ["choiceSwitch": choiceSwitch])
 
-		choiceSwitch.setContentCompressionResistancePriority(Constraints.SingleChoiceField.switchCompressionResistancePriority, for: .horizontal)
+        choiceSwitch.setContentCompressionResistancePriority(UILayoutPriority(rawValue: Constraints.SingleChoiceField.switchCompressionResistancePriority), for: .horizontal)
 	}
 
 }
