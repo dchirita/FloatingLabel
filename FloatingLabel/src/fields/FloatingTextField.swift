@@ -35,7 +35,7 @@ open class FloatingTextField: FloatingField {
 		stopListeningToTextField()
 	}
 
-    override open func setup() {
+    @objc override open func setup() {
         super.setup()
         
         listenToTextField()
